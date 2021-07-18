@@ -28,17 +28,22 @@ function getActiveUsersPerformance(users, blockedUsers) {
     return users.filter((user) => !dictironaryBlockedUsers.has(user))
 }
 
-console.time()
 
 async function getUsersFromFileAndCallFilterMethod () {
     const usersFromFile = await getUsersFromFile()
     const blockedUsers = await getBlockedUsersFromFile()
+
+    console.time("getActiveUsers")
+    getActiveUsers(usersFromFile, blockedUsers)
+    console.timeEnd("getActiveUsers")
+
+    console.time("getActiveUsersPerformance")
     getActiveUsersPerformance(usersFromFile, blockedUsers)
+    console.timeEnd("getActiveUsersPerformance")
 }
 
 getUsersFromFileAndCallFilterMethod();
 
-console.timeEnd()
 
 
 
